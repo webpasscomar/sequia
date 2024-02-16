@@ -292,12 +292,12 @@ return [
     'menu' => [
         // Navbar items:
         [
-            'type'         => 'navbar-search',
-            'text'         => 'Buscar',
+            'type' => 'navbar-search',
+            'text' => 'Buscar',
             'topnav_right' => true,
         ],
         [
-            'type'         => 'fullscreen-widget',
+            'type' => 'fullscreen-widget',
             'topnav_right' => true,
         ],
 
@@ -318,8 +318,9 @@ return [
         ],
         [
             'text' => 'Organismos',
-            'url' => 'admin/organismos',
+            'route' => 'admin.organismos',
             'icon' => 'fas fa-wrench',
+            'can' => 'task-admin',
         ],
         [
             'text' => 'Indicadores',
@@ -574,5 +575,5 @@ return [
     |
     */
 
-    'livewire' => true,
+    'livewire' => false,
 ];
