@@ -2,11 +2,12 @@
 
 namespace App\Http\Livewire\Admin;
 
+use App\Models\Capa;
 use Livewire\Component;
 
 class Capas extends Component
 {
-    protected $indicadores;
+    protected $capas;
     protected $listeners = ['delete', 'updateTable'];
     public $preserveInput = ['nombre', 'descripcion', 'color', 'frecuencia', 'organismo_id', 'orden'];
 
@@ -17,42 +18,20 @@ class Capas extends Component
         $titulo,
         $resumen,
         $status,
+        $orden,
         $presentacion,
         $fechaDesde,
         $fechaHasta,
-        $georeferencial,
-        $latitude, //para datos geometricos
-        $longitude, // para datos geometricos
-        $punto; // guarda el dato geométrico cuando es de tipo punto
-
-    // Array para guardar datos geométricos de tipo vector - mínimo son 2 pares   
-    public $puntosVector = [
-        ['latitude' => '', 'longitude' => ''],
-        ['latitude' => '', 'longitude' => ''],
-    ];
-
-    //Array para guardar datos de tipo geométricos para polygonos - mínimo 3 pares
-    public $puntosPoligono = [
-        ['latitude' => '', 'longitude' => ''],
-        ['latitude' => '', 'longitude' => ''],
-        ['latitude' => '', 'longitude' => ''],
-    ];
-
-    // Agregar puntos en vector ó poligono si hacen falta dependiendo de la presentación seleccionada
-    public function agregarPunto()
-    {
-        if ($this->presentacion === 'Vectorial') {
-            $this->puntosVector[] = ['latitude' => '', 'longitude' => ''];
-        } else if ($this->presentacion === 'Poligono') {
-            $this->puntosPoligono[] = ['latitude' => '', 'longitude' => ''];
-        }
-    }
+        $georeferencial;
 
 
     public function render()
     {
+        $this->capas = Capa::all();
 
-        return view('livewire.admin.capas')
+        return view('livewire.admin.capas', [
+            'capas' => $this->capas
+        ])
             ->layout('layouts.adminlte');
     }
 
@@ -67,15 +46,13 @@ class Capas extends Component
     {
         if ($this->accion == 'create') {
             return [
-                'nombre' => 'required',
-                'frecuencia' => 'required|in:Semanal,Mensual,Trimestral,Variable',
-                'organismo_id' => 'required'
+                'titulo' => 'required',
+                'indicador_id' => 'required'
             ];
         } else {
             return [
-                'nombre' => 'required',
-                'frecuencia' => 'required|in:Semanal,Mensual,Trimestral,Variable',
-                'organismo_id' => 'required'
+                'titulo' => 'required',
+                'indicador_id' => 'required'
             ];
         }
     }
@@ -86,14 +63,12 @@ class Capas extends Component
         if ($this->accion == 'create') {
             return [
                 'nombre.required' => 'El nombre es requerido',
-                'frecuencia.required' => 'La frecuencia es requerida',
-                'organismo_id.required' => 'El organismo es requerido'
+                'indicador_id.required' => 'El indicador es requerido'
             ];
         } else {
             return [
                 'nombre.required' => 'El nombre del indicador es necesario',
-                'frecuencia.required' => 'La frecuencia es requerida',
-                'organismo_id.required' => 'El organismo es requerido'
+                'indicador_id.required' => 'El organismo es requerido'
             ];
         }
     }
@@ -111,16 +86,18 @@ class Capas extends Component
     {
         $this->accion = 'edit';
 
-        $indicador = Indicador::findOrFail($id);
+        $capa = Capa::findOrFail($id);
 
-        $this->indicador_id = $indicador->id;
-        $this->organismo_id = $indicador->organismo_id;
-        $this->nombre = $indicador->nombre;
-        $this->color = $indicador->color;
-        $this->descripcion = $indicador->descripcion;
-        $this->frecuencia = $indicador->frecuencia;
-        $this->estado = $indicador->estado;
-        $this->orden = $indicador->orden;
+        $this->capa_id = $capa->id;
+        $this->indicador_id = $capa->indicador_id;
+        $this->titulo = $capa->titulo;
+        $this->resumen = $capa->resumen;
+        $this->presentacion = $capa->presentacion;
+        $this->georeferencial = $capa->georeferencial;
+        $this->fechaDesde = $capa->fechaDesde;
+        $this->fechaHasta = $capa->fechaHasta;
+        $this->status = $capa->status;
+        $this->orden = $capa->orden;
 
         $this->openModal();
     }
@@ -130,16 +107,25 @@ class Capas extends Component
     {
         $this->validate();
 
-        Indicador::updateOrCreate(
-            ['id' => $this->indicador_id],
+        if ($this->georeferencial) {
+            $file_name = $this->georeferencial->getClientOriginalName();
+            $this->georeferencial->sotreAs('georeferencial', $file_name);
+        } else {
+            $file_name = $this->georeferencial;
+        }
+
+        Capa::updateOrCreate(
+            ['id' => $this->capa_id],
             [
-                'nombre' => $this->nombre,
-                'organismo_id' => $this->organismo_id,
-                'descripcion' => $this->descripcion,
-                'color' => $this->color,
-                'frecuencia' => $this->frecuencia,
+                'titulo' => $this->titulo,
+                'indicador_id' => $this->indicador_id,
+                'resumen' => $this->resumen,
+                'georeferencial' => $this->georeferencial,
+                'presentacion' => $this->presentacion,
+                'fechaDesde' => $this->fechaDesde,
+                'fechaHasta' => $this->fechaHasta,
                 'orden' => $this->orden,
-                'estado' => 1,
+                'status' => 1,
             ]
         );
         $this->emit('mensajePositivo', ['mensaje' => 'Operación exitosa']);
@@ -150,7 +136,7 @@ class Capas extends Component
     // Borrar un organismo
     public function delete($id)
     {
-        Indicador::find($id)->delete();
+        Capa::find($id)->delete();
         $this->emit('mensajePositivo', ['mensaje' => 'Organismo eliminado correctamente']);
         $this->emit('table');
     }
@@ -172,14 +158,16 @@ class Capas extends Component
 
     private function resetInputField()
     {
-        $this->nombre = '';
-        $this->descripcion = '';
-        $this->color = '';
-        $this->frecuencia = '';
-        $this->estado = 1;
-        $this->organismo_id = '';
-        $this->indicador_id = 0;
+        $this->titulo = '';
+        $this->resumen = '';
+        $this->georeferencial = '';
+        $this->presentacion = '';
+        $this->status = 1;
+        $this->indicador_id = '';
+        $this->capa_id = 0;
         $this->orden = '';
+        $this->fechaDesde = '';
+        $this->fechaHasta = '';
         $this->resetErrorBag();
     }
 }

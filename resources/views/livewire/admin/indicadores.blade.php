@@ -18,39 +18,39 @@
             <div class="table-responsive">
                 <table class="table table-hover table-striped table-bordered mt-3 datatable" id="myTable">
                     <thead>
-                    <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Descipción</th>
-                        <th scope="col">Orden</th>
-                        <th scope="col">Organismo</th>
-                        <th scope="col" class="text-center" style="width: 15%">Acciones</th>
-                    </tr>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Descripción</th>
+                            <th scope="col">Orden</th>
+                            <th scope="col">Organismo</th>
+                            <th scope="col" class="text-center" style="width: 15%">Acciones</th>
+                        </tr>
                     </thead>
                     <tbody>
-                    @foreach ($indicadores as $indicador)
-                        <tr>
-                            <th scope="row" class="align-middle">{{ $indicador->id }}</th>
-                            <td class="align-middle">{{ $indicador->nombre }}</td>
-                            <td class="align-middle">{{ $indicador->descripcion }}</td>
-                            <td class="align-middle">{{ $indicador->orden }}</td>
-                            <td class="align-middle">{{ $indicador->organismo->nombre }}</td>
-                            <td class="align-middle">
-                                <div class="d-flex flex-md-row gap-1 justify-content-evenly">
-                                    <div class="m-1 mt-3">
-                                        <livewire:toggle-button :model="$indicador" field="estado"
-                                                                key="{{ $indicador->id }}"/>
-                                    </div>
-                                    <button wire:click="edit({{ $indicador->id }})"
+                        @foreach ($indicadores as $indicador)
+                            <tr>
+                                <th scope="row" class="align-middle">{{ $indicador->id }}</th>
+                                <td class="align-middle">{{ $indicador->nombre }}</td>
+                                <td class="align-middle">{{ $indicador->descripcion }}</td>
+                                <td class="align-middle">{{ $indicador->orden }}</td>
+                                <td class="align-middle">{{ $indicador->organismo->nombre }}</td>
+                                <td class="align-middle">
+                                    <div class="d-flex flex-md-row gap-1 justify-content-evenly">
+                                        <div class="m-1 mt-3">
+                                            <livewire:toggle-button :model="$indicador" field="estado"
+                                                key="{{ $indicador->id }}" />
+                                        </div>
+                                        <button wire:click="edit({{ $indicador->id }})"
                                             class="btn btn-sm btn-primary m-1" data-toggle="modal"
                                             data-target="#roleModal" title="Editar"><i class="fa fa-edit"></i></button>
-                                    <button wire:click="$emit('alertDelete',{{ $indicador->id }})"
+                                        <button wire:click="$emit('alertDelete',{{ $indicador->id }})"
                                             class="btn btn-sm btn-danger m-1" title="Eliminar"><i
-                                            class="fas fa-trash-alt" style="color: white "></i></button>
-                                </div>
-                            </td>
-                        </tr>
-                    @endforeach
+                                                class="fas fa-trash-alt" style="color: white "></i></button>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
