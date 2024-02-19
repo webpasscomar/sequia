@@ -324,12 +324,13 @@ return [
         ],
         [
             'text' => 'Indicadores',
-            'url' => 'admin/indicadores',
+            'route' => 'admin.indicadores',
             'icon' => 'fa fa-book',
+            'can' => 'task-admin'
         ],
         [
             'text' => 'Capas',
-            'url' => 'admin/capas',
+            'route' => 'admin.capas',
             'icon' => 'fa fa-comment',
         ],
         // [

@@ -1,7 +1,8 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
+use App\Models\Indicador;
 use Illuminate\Database\Eloquent\Model;
 
 class Capa extends Model

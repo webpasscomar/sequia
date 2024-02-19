@@ -19,7 +19,6 @@
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     @livewireStyles
 
-
 @stop
 
 
@@ -37,8 +36,9 @@
     {{-- <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script> --}}
 
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('#myTable').DataTable({
+                "ordering": false,
                 "language": {
                     "lengthMenu": "Mostrar _MENU_ elementos por página",
                     "zeroRecords": "No se encontraron resultados",
@@ -59,6 +59,7 @@
         Livewire.on('table', () => {
             $('#myTable').DataTable().destroy();
             $('#myTable').DataTable({
+                "ordering": false,
                 "language": {
                     "lengthMenu": "Mostrar _MENU_ elementos por página",
                     "zeroRecords": "No se encontraron resultados",
@@ -103,9 +104,8 @@
         });
 
 
-
         //emit mensaje negativo
-        Livewire.on('mensajeNegativo', function(mensaje) {
+        Livewire.on('mensajeNegativo', function (mensaje) {
             Swal.fire({
                 title: 'Atencion',
                 text: mensaje['mensaje'],
@@ -116,7 +116,7 @@
 
 
         //emit mensaje positivo
-        Livewire.on('mensajePositivo', function(mensaje) {
+        Livewire.on('mensajePositivo', function (mensaje) {
             Swal.fire({
                 title: 'Excelente!',
                 text: mensaje['mensaje'],

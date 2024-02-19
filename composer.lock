@@ -7419,16 +7419,16 @@
         },
         {
             "name": "laravel-lang/actions",
-            "version": "1.5.0",
+            "version": "1.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Laravel-Lang/actions.git",
-                "reference": "6231c309943a47f39911a135449511d017de29e3"
+                "reference": "3b71749230a5bcbb0b7d1466ec5c75c5af5f1ea1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Laravel-Lang/actions/zipball/6231c309943a47f39911a135449511d017de29e3",
-                "reference": "6231c309943a47f39911a135449511d017de29e3",
+                "url": "https://api.github.com/repos/Laravel-Lang/actions/zipball/3b71749230a5bcbb0b7d1466ec5c75c5af5f1ea1",
+                "reference": "3b71749230a5bcbb0b7d1466ec5c75c5af5f1ea1",
                 "shasum": ""
             },
             "require": {
@@ -7480,9 +7480,9 @@
             ],
             "support": {
                 "issues": "https://github.com/Laravel-Lang/actions/issues",
-                "source": "https://github.com/Laravel-Lang/actions/tree/1.5.0"
+                "source": "https://github.com/Laravel-Lang/actions/tree/1.5.1"
             },
-            "time": "2024-02-15T06:29:48+00:00"
+            "time": "2024-02-15T22:44:13+00:00"
         },
         {
             "name": "laravel-lang/attributes",

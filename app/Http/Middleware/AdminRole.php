@@ -27,6 +27,5 @@ class AdminRole
 
         }
         return $next($request);
-
     }
 }

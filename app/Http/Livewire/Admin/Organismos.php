@@ -13,13 +13,17 @@ class Organismos extends Component
     protected $listeners = ['delete', 'updateTable'];
 
     public $showModal = 'none';
-    public $organismo_id, $organismo, $currentImage, $currentTitle, $action, $nombre, $sigla, $status;
+    public $organismo_id, $organismo, $action, $nombre, $sigla, $status;
+
+    // Preservar los input en el caso de errores de validación para no tener que completar completamente el formulario otra vez
+    public $preserveInput = ['nombre', 'siga'];
 
     public function render()
     {
-        $organismos = Organismo::all();
+        $this->organismos = Organismo::orderBy('nombre', 'asc')
+            ->get();
         return view('livewire.admin.organismos', [
-            'organismos' => $organismos
+            'organismos' => $this->organismos
         ])
             ->layout('layouts.adminlte');
     }
@@ -41,7 +45,7 @@ class Organismos extends Component
         } else {
             return [
                 'nombre' => 'required',
-                'sigla' => 'required',
+                'sigla' => 'required|max:10',
             ];
         }
     }
@@ -79,7 +83,7 @@ class Organismos extends Component
 
         $organismo = Organismo::findOrFail($id);
         $this->organismo_id = $organismo->id;
-        $this->nombre = $oganismo->nombre;
+        $this->nombre = $organismo->nombre;
         $this->sigla = $organismo->sigla;
         $this->status = $organismo->status;
 
@@ -107,7 +111,7 @@ class Organismos extends Component
     // Borrar un organismo
     public function delete($id)
     {
-        Service::find($id)->delete();
+        Organismo::find($id)->delete();
         $this->emit('mensajePositivo', ['mensaje' => 'Organismo eliminado correctamente']);
         $this->emit('table');
     }
@@ -132,7 +136,7 @@ class Organismos extends Component
         $this->nombre = '';
         $this->sigla = '';
         $this->status = 1;
-        $this->service_id = 0;
+        $this->organismo_id = 0;
         $this->resetErrorBag();
     }
 }
