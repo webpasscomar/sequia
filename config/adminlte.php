@@ -311,6 +311,7 @@ return [
         //     'url' => 'admin/roles',
         //     'icon' => 'fas fa-fw fa-user',
         // ],
+
         [
             'text' => 'Usuarios',
             'url' => 'admin/users',
