@@ -12,7 +12,7 @@ class CreateOrganismosTable extends Migration
             $table->id();
             $table->string('nombre');
             $table->string('sigla', 10);
-            $table->integer('status');
+            $table->integer('status')->default(1);
             $table->timestamps();
         });
     }

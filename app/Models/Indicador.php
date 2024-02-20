@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
+use App\Models\Capa;
 use Illuminate\Database\Eloquent\Model;
 
 class Indicador extends Model
 {
     protected $table = 'indicadores';
-    protected $fillable = ['nombre', 'descripcion', 'color', 'frecuencia', 'status'];
+    protected $fillable = ['nombre', 'descripcion', 'color', 'frecuencia', 'status', 'organismo_id', 'orden'];
+    
 
     // Relación con el modelo Organismo
     public function organismo()

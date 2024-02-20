@@ -12,10 +12,11 @@ class CreateIndicadoresTable extends Migration
             $table->id();
             $table->foreignId('organismo_id')->constrained('organismos');
             $table->string('nombre');
-            $table->text('descripcion');
-            $table->string('color', 7); // Valor RGB
+            $table->text('descripcion')->nullable();
+            $table->string('color', 7)->nullable(); // Valor Hexadecimal
             $table->enum('frecuencia', ['Semanal', 'Mensual', 'Trimestral', 'Variable']);
-            $table->integer('status');
+            $table->integer('orden')->default(0);
+            $table->integer('estado')->default(1);
             $table->timestamps();
         });
     }

@@ -292,12 +292,12 @@ return [
     'menu' => [
         // Navbar items:
         [
-            'type'         => 'navbar-search',
-            'text'         => 'Buscar',
+            'type' => 'navbar-search',
+            'text' => 'Buscar',
             'topnav_right' => true,
         ],
         [
-            'type'         => 'fullscreen-widget',
+            'type' => 'fullscreen-widget',
             'topnav_right' => true,
         ],
 
@@ -319,17 +319,19 @@ return [
         ],
         [
             'text' => 'Organismos',
-            'url' => 'admin/organismos',
+            'route' => 'admin.organismos',
             'icon' => 'fas fa-wrench',
+            'can' => 'task-admin',
         ],
         [
             'text' => 'Indicadores',
-            'url' => 'admin/indicadores',
+            'route' => 'admin.indicadores',
             'icon' => 'fa fa-book',
+            'can' => 'task-admin'
         ],
         [
             'text' => 'Capas',
-            'url' => 'admin/capas',
+            'route' => 'admin.capas',
             'icon' => 'fa fa-comment',
         ],
         // [
@@ -575,5 +577,5 @@ return [
     |
     */
 
-    'livewire' => true,
+    'livewire' => false,
 ];

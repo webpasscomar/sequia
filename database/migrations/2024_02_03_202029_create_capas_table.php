@@ -16,7 +16,7 @@ class CreateCapasTable extends Migration
             $table->enum('presentacion', ['Vectorial', 'Puntos', 'Poligono']);
             $table->date('fechaDesde');
             $table->date('fechaHasta')->nullable();
-            $table->geometry('georeferencial'); // Puedes cambiar el tipo según el tipo de dato GIS que uses
+            $table->geometry('georeferencial')->nullable(); // Puedes cambiar el tipo según el tipo de dato GIS que uses
             $table->integer('status');
             $table->timestamps();
         });
