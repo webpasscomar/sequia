@@ -3,13 +3,15 @@
 namespace App\Http\Livewire\Admin;
 
 use App\Models\Capa;
+use App\Models\Indicador;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class Capas extends Component
 {
     protected $capas;
     protected $listeners = ['delete', 'updateTable'];
-    public $preserveInput = ['nombre', 'descripcion', 'color', 'frecuencia', 'organismo_id', 'orden'];
+    public $preserveInput = ['nombre', 'descripcion', 'color', 'frecuencia', 'organismo_id', 'orden', 'fechaDesde', 'fechaHasta'];
 
     public $showModal = 'none';
     public $capa_id,
@@ -24,13 +26,18 @@ class Capas extends Component
         $fechaHasta,
         $georeferencial;
 
+    use WithFileUploads;
 
     public function render()
     {
-        $this->capas = Capa::all();
+        $this->capas = Capa::orderBy('titulo', 'asc')->get();
+        $indicadores = Indicador::all();
+        $enumPresentacion = ['Vectorial', 'Puntos', 'Poligono'];
 
         return view('livewire.admin.capas', [
-            'capas' => $this->capas
+            'capas' => $this->capas,
+            'indicadores' => $indicadores,
+            'presentaciones' => $enumPresentacion
         ])
             ->layout('layouts.adminlte');
     }
@@ -46,13 +53,17 @@ class Capas extends Component
     {
         if ($this->accion == 'create') {
             return [
-                'titulo' => 'required',
-                'indicador_id' => 'required'
+                'titulo' => 'required|min:3',
+                'indicador_id' => 'required',
+                'presentacion'=>'required',
+                'fechaDesde'=> 'nullable|date'
             ];
         } else {
             return [
                 'titulo' => 'required',
-                'indicador_id' => 'required'
+                'indicador_id' => 'required',
+                'presentacion'=>'required',
+                'fechaDesde'=> 'nullable'
             ];
         }
     }
@@ -62,13 +73,17 @@ class Capas extends Component
     {
         if ($this->accion == 'create') {
             return [
-                'nombre.required' => 'El nombre es requerido',
-                'indicador_id.required' => 'El indicador es requerido'
+                'titulo.required' => 'El nombre es requerido',
+                'titulo.min' => 'Escriba 3 caracteres mínimo',
+                'indicador_id.required' => 'El indicador es requerido',
+                'presentacion.required'=> 'Campo requerido'
             ];
         } else {
             return [
-                'nombre.required' => 'El nombre del indicador es necesario',
-                'indicador_id.required' => 'El organismo es requerido'
+                'titulo.required' => 'El nombre es requerido',
+                'titulo.min' => 'Escriba 3 caracteres mínimo',
+                'indicador_id.required' => 'El organismo es requerido',
+                'presentacion.required'=> 'Campo requerido'
             ];
         }
     }
@@ -107,12 +122,14 @@ class Capas extends Component
     {
         $this->validate();
 
-        if ($this->georeferencial) {
-            $file_name = $this->georeferencial->getClientOriginalName();
-            $this->georeferencial->sotreAs('georeferencial', $file_name);
-        } else {
-            $file_name = $this->georeferencial;
-        }
+        // if ($this->georeferencial) {
+
+        //     $file_name = $this->georeferencial->getClientOriginalName();
+        //     $this->georeferencial->storeAs('georeferencial', $file_name);
+        // } else {
+        //     $file_name = $this->georeferencial;
+        // }
+
 
         Capa::updateOrCreate(
             ['id' => $this->capa_id],
@@ -120,7 +137,7 @@ class Capas extends Component
                 'titulo' => $this->titulo,
                 'indicador_id' => $this->indicador_id,
                 'resumen' => $this->resumen,
-                'georeferencial' => $this->georeferencial,
+                // 'georeferencial' => $this->georeferencial,
                 'presentacion' => $this->presentacion,
                 'fechaDesde' => $this->fechaDesde,
                 'fechaHasta' => $this->fechaHasta,
@@ -165,9 +182,9 @@ class Capas extends Component
         $this->status = 1;
         $this->indicador_id = '';
         $this->capa_id = 0;
-        $this->orden = '';
-        $this->fechaDesde = '';
-        $this->fechaHasta = '';
+        $this->orden = null;
+        $this->fechaDesde = null;
+        $this->fechaHasta = null;
         $this->resetErrorBag();
     }
 }

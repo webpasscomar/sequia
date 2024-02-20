@@ -8,7 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class Capa extends Model
 {
     protected $table = 'capas';
-    protected $fillable = ['titulo', 'resumen', 'indicador_id', 'presentacion', 'fechaDesde', 'fechaHasta', 'georeferencial', 'status'];
+    protected $fillable = [
+        'titulo',
+        'resumen',
+        'indicador_id',
+        'presentacion',
+        'fechaDesde',
+        'fechaHasta',
+        'georeferencial',
+        'status',
+        'orden'
+    ];
 
     // Relación con el modelo Indicador
     public function indicador()

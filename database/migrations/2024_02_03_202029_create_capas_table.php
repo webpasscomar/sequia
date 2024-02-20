@@ -11,13 +11,14 @@ class CreateCapasTable extends Migration
         Schema::create('capas', function (Blueprint $table) {
             $table->id();
             $table->string('titulo');
-            $table->text('resumen');
+            $table->text('resumen')->nullable();
             $table->foreignId('indicador_id')->constrained('indicadores');
             $table->enum('presentacion', ['Vectorial', 'Puntos', 'Poligono']);
-            $table->date('fechaDesde');
+            $table->date('fechaDesde')->nullable();
             $table->date('fechaHasta')->nullable();
             $table->geometry('georeferencial')->nullable(); // Puedes cambiar el tipo según el tipo de dato GIS que uses
-            $table->integer('status');
+            $table->integer('orden')->nullable();
+            $table->integer('status')->default(1);
             $table->timestamps();
         });
     }
