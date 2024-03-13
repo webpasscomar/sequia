@@ -6,32 +6,28 @@
           <div class="col-md-3 mb-3">
             <p class="h6 fw-bold text-white">Contacto</p>
             <ul class="list-unstyled light text-light">
-              <li> Av. H. Yrigoyen 15750 (1852) <br>
-                Burzaco, Buenos Aires, Argentina</li>
-              <li class="pt-3 pb-2 fw-bold h5 text-white"> (5411) 4002-4400 | <br>
-                4238-4000</li>
+              <li> Av. San Martín 451 (1000) <br>
+                C.A.B.A. - Argentina</li>
+              <li class="pt-3 pb-2 fw-bold h5 text-white">11 4444-4444</li>
             </ul>
             <p class="h6 fw-bold text-white">Horarios</p>
-            <span class="text-light light"> lun a vier 9 a 12 y de 14 a 17:30</span>
+            <span class="text-light light"> lun a vier 9 a 18:00</span>
           </div>
           <!-- categorias -->
           <div class="col-md-3 mb-3">
-            <p class="h6 fw-bold text-white">Categorías de productos</p>
+            <p class="h6 fw-bold text-white">Mapa del sitio</p>
             <ul class="list-unstyled text-white-50 light">
-              <li><a href="{{ route('home') }}" class="text-decoration-none link-light"
-                  title="Saber más sobre la Empresa"> Empresa
+              <li><a href="{{ route('mesa') }}" class="text-decoration-none link-light"
+                  title="Mesa nacional del monitor"> Mesa nacional del monitor
                 </a></li>
-              <li><a href="{{ route('home') }}" class="text-decoration-none link-light" title="Todos los servicios">
-                  Servicios
+              <li><a href="{{ route('proceso') }}" class="text-decoration-none link-light" title="Proceso de trabajo">
+                  Proceso de trabajo
                 </a></li>
-              <li><a href="{{ route('home') }}" class="text-decoration-none link-light"
-                  title="Todos nuestros productos">
-                  Productos </a></li>
-              <li><a href="/" class="text-decoration-none link-light" title="Solicitá tu presupuesto">
-                  Presupuestos </a></li>
-              <li><a href="{{ route('home') }}" class="text-decoration-none link-light"
-                  title="Todas la últimas novedades">
-                  Novedades </a></li>
+              <li><a href="{{ route('referencias') }}" class="text-decoration-none link-light" title="Referencias">
+                  Referencias </a></li>
+              <li><a href="/" class="text-decoration-none link-light" title="Indices">
+                  Indices </a></li>
+
               <li><a href="{{ route('contacto') }}" class="text-decoration-none link-light" title="Nuestros contactos">
                   Contacto </a>
               </li>
@@ -39,8 +35,8 @@
           </div>
           <!-- data fiscal -->
           <div class="col-md-3 mb-3">
-            <p class="h6 fw-bold text-white">Data fiscal</p>
-            <img src="{{ asset('img/datafiscal-qr.png') }}" title="Imagen de data fiscal de la empresa">
+            <p class="h6 fw-bold text-white">Organismos</p>
+            <img src="{{ asset('img/organismo1.png') }}" title="Organismo 1">
           </div>
           <!-- redes -->
           <div class="col-md-3">

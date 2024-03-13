@@ -30,7 +30,7 @@ return [
     |
     */
 
-    'use_ico_only' => true,
+    'use_ico_only' => false,
     'use_full_favicon' => false,
 
     /*
@@ -64,7 +64,7 @@ return [
     */
 
     'logo' => '<b class="fs-4 navbar-brand">Monitor</b>',
-    'logo_img' => 'img/sequia.ico',
+    'logo_img' => '',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
@@ -86,7 +86,7 @@ return [
     'auth_logo' => [
         'enabled' => false,
         'img' => [
-            'path' => 'img/logo.png',
+            'path' => '',
             'alt' => 'Sequia Logo',
             'class' => '',
             'width' => 50,
@@ -316,39 +316,33 @@ return [
             'text' => 'Usuarios',
             'url' => 'admin/users',
             'icon' => 'fas fa-fw fa-users',
+            'can' => ['admin-role']
         ],
         [
             'text' => 'Organismos',
             'route' => 'admin.organismos',
             'icon' => 'fas fa-wrench',
-            'can' => 'task-admin',
+            'can' => ['admin-role']
         ],
         [
-            'text' => 'Indicadores',
-            'route' => 'admin.indicadores',
+            'text' => 'Indices',
+            'route' => 'admin.indices',
             'icon' => 'fa fa-book',
-            'can' => 'task-admin'
+            'can' => ['admin-role']
         ],
+        // [
+        //     'text' => 'Metadata',
+        //     'route' => 'admin.metadata',
+        //     'icon' => 'fa fa-book',
+        //     'can' => ['admin-role']
+        // ],
         [
             'text' => 'Capas',
             'route' => 'admin.capas',
             'icon' => 'fa fa-comment',
+            'can' => ['admin-role']
         ],
-        // [
-        //     'text' => 'Novedades',
-        //     'url' => 'admin/novedades',
-        //     'icon' => 'fa fa-address-book',
-        // ],
-        // [
-        //     'text' => 'Galería',
-        //     'url' => 'admin/galerias',
-        //     'icon' => 'fa fa-film',
-        // ],
-        // [
-        //     'text' => 'Contactos',
-        //     'url' => 'admin/contactos',
-        //     'icon' => 'fa fa-address-card',
-        // ],
+
 
 
         // [

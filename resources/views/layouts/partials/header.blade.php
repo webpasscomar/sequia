@@ -13,17 +13,17 @@
       </button>
       <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
         <ul class="navbar-nav">
-          <li class="nav-item {{ request()->routeIS('mesa') ? 'active' : '' }}">
-            <a href="{{ route('home') }}" title="Página principal" class="nav-link">Mesa nacional del monitor<span
+          <li class="nav-item {{ request()->routeIS('mesa') ? 'active' : 'mesa' }}">
+            <a href="{{ route('mesa') }}" title="Página principal" class="nav-link">Mesa nacional del monitor<span
                 class="visually-hidden">(Mesa)</span></a>
           </li>
-          <li class="nav-item {{ request()->routeIS('proceso') ? 'active' : '' }}">
-            <a href="{{ route('home') }}" title="Nuestros servicios" class="nav-link">Proceso de trabajo</a>
+          <li class="nav-item {{ request()->routeIS('proceso') ? 'active' : 'proceso' }}">
+            <a href="{{ route('proceso') }}" title="Nuestros servicios" class="nav-link">Proceso de trabajo</a>
           </li>
 
 
-          <li class="nav-item {{ request()->routeIS('referencias') ? 'active' : '' }}">
-            <a href="{{ route('home') }}" title="Nuestras actividades" class="nav-link">Referencias</a>
+          <li class="nav-item {{ request()->routeIS('referencias') ? 'active' : 'referencias' }}">
+            <a href="{{ route('referencias') }}" title="Nuestras actividades" class="nav-link">Referencias</a>
           </li>
 
           <li class="nav-item dropdown {{ request()->routeIS('indices') ? 'active' : '' }}">
@@ -43,7 +43,7 @@
           </li>
 
           <!-- contacto -->
-          <li class="nav-item {{ request()->routeIS('contacto') ? 'active' : '' }}">
+          <li class="nav-item {{ request()->routeIS('contacto') ? 'active' : 'contacto' }}">
             <a href="{{ route('contacto') }}" title="Contactanos" class="nav-link">Contacto</a>
           </li>
           <!-- buscador -->

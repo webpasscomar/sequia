@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Admin;
 
 use App\Models\Capa;
+use App\Models\Indicador;
 use Livewire\Component;
 
 class Capas extends Component
@@ -22,15 +23,18 @@ class Capas extends Component
         $presentacion,
         $fechaDesde,
         $fechaHasta,
-        $georeferencial;
+        $georeferencial,
+        $indicadores;
 
 
     public function render()
     {
         $this->capas = Capa::all();
+        $this->indicadores = Indicador::all();
 
         return view('livewire.admin.capas', [
-            'capas' => $this->capas
+            'capas' => $this->capas,
+            'indicadores' => $this->indicadores
         ])
             ->layout('layouts.adminlte');
     }

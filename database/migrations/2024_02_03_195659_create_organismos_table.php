@@ -10,6 +10,7 @@ class CreateOrganismosTable extends Migration
     {
         Schema::create('organismos', function (Blueprint $table) {
             $table->id();
+            $table->string('logo')->nullable();
             $table->string('nombre');
             $table->string('sigla', 10);
             $table->integer('status')->default(1);

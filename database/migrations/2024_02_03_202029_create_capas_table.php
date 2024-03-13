@@ -12,7 +12,7 @@ class CreateCapasTable extends Migration
             $table->id();
             $table->string('titulo');
             $table->text('resumen');
-            $table->foreignId('indicador_id')->constrained('indicadores');
+            $table->foreignId('indice_id')->constrained('indices');
             $table->enum('presentacion', ['Vectorial', 'Puntos', 'Poligono']);
             $table->date('fechaDesde');
             $table->date('fechaHasta')->nullable();

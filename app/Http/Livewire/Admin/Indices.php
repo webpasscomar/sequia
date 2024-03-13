@@ -2,18 +2,18 @@
 
 namespace App\Http\Livewire\Admin;
 
-use App\Models\Indicador;
+use App\Models\Indice;
 use App\Models\Organismo;
 use Livewire\Component;
 
-class Indicadores extends Component
+class indices extends Component
 {
-    protected $indicadores;
+    protected $indices;
     protected $listeners = ['delete', 'updateTable'];
     public $preserveInput = ['nombre', 'descripcion', 'color', 'frecuencia', 'organismo_id', 'orden'];
 
     public $showModal = 'none';
-    public $indicador_id,
+    public $indice_id,
         $indicador,
         $organismo_id,
         $accion,
@@ -28,15 +28,15 @@ class Indicadores extends Component
     public function render()
     {
 
-        $this->indicadores = Indicador::orderBy('nombre', 'asc')
+        $this->indices = Indice::orderBy('nombre', 'asc')
             ->get();
         // Obtener organismos
         $organismos = Organismo::all();
         // Datos de Frecuancia
         $enumFrecuencia = ['Semanal', 'Mensual', 'Trimestral', 'Variable'];
 
-        return view('livewire.admin.indicadores', [
-            'indicadores' => $this->indicadores,
+        return view('livewire.admin.indices', [
+            'indices' => $this->indices,
             'organismos' => $organismos,
             'frecuencias' => $enumFrecuencia
         ])
@@ -98,9 +98,9 @@ class Indicadores extends Component
     {
         $this->accion = 'edit';
 
-        $indicador = Indicador::findOrFail($id);
-        
-        $this->indicador_id = $indicador->id;
+        $indicador = Indice::findOrFail($id);
+
+        $this->indice_id = $indice->id;
         $this->organismo_id = $indicador->organismo_id;
         $this->nombre = $indicador->nombre;
         $this->color = $indicador->color;
@@ -117,8 +117,8 @@ class Indicadores extends Component
     {
         $this->validate();
 
-        Indicador::updateOrCreate(
-            ['id' => $this->indicador_id],
+        Indice::updateOrCreate(
+            ['id' => $this->indice_id],
             [
                 'nombre' => $this->nombre,
                 'organismo_id' => $this->organismo_id,
@@ -137,7 +137,7 @@ class Indicadores extends Component
     // Borrar un organismo
     public function delete($id)
     {
-        Indicador::find($id)->delete();
+        Indice::find($id)->delete();
         $this->emit('mensajePositivo', ['mensaje' => 'Organismo eliminado correctamente']);
         $this->emit('table');
     }
@@ -165,7 +165,7 @@ class Indicadores extends Component
         $this->frecuencia = '';
         $this->estado = 1;
         $this->organismo_id = '';
-        $this->indicador_id = 0;
+        $this->indice_id = 0;
         $this->orden = '';
         $this->resetErrorBag();
     }

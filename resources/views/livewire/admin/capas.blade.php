@@ -60,6 +60,6 @@
 
     {{--    Mostrar modal para agregar o editar indicadores --}}
     @if ($showModal == 'block')
-        @include('livewire.admin.indicadores-form')
+        @include('livewire.admin.capas-form')
     @endif
 </div>

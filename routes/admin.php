@@ -6,7 +6,7 @@ use App\Http\Livewire\Admin\Capas;
 use App\Http\Livewire\Admin\Roles;
 use App\Http\Livewire\Admin\Users;
 use App\Http\Livewire\Admin\Organismos;
-use App\Http\Livewire\Admin\Indicadores;
+use App\Http\Livewire\Admin\Indices;
 
 
 /*
@@ -21,14 +21,22 @@ use App\Http\Livewire\Admin\Indicadores;
 */
 
 Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
-Route::get('/roles', Roles::class)->name('admin.roles');
-Route::get('/users', Users::class)->name('admin.users');
-Route::get('/capas', Capas::class)->name('admin.capas');
+
+
 
 /*Protejo las rutas con el middleware AdminRole, para que los usuarios que no tengan el permiso de administrador
 no puedan acceder*/
-Route::middleware(['adminRole'])->group(function () {
+Route::middleware(['admin-role'])->group(function () {
     // Ruta Organismos - Protegida
+    // Route::get('/roles', Roles::class)->name('admin.roles');
+    Route::get('/users', Users::class)->name('admin.users');
     Route::get('/organismos', Organismos::class)->name('admin.organismos');
-    Route::get('/indicadores', Indicadores::class)->name('admin.indicadores');
+    Route::get('/indices', Indices::class)->name('admin.indices');
+    Route::get('/capas', Capas::class)->name('admin.capas');
 });
+
+// Route::middleware(['editor'])->group(function () {
+//     // Ruta Organismos - Protegida
+//     Route::get('/indices', Indices::class)->name('admin.indices');
+//     Route::get('/capas', Capas::class)->name('admin.capas');
+// });

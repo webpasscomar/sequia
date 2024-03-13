@@ -1,0 +1,21 @@
+Esto es lo que estamos usando en ambos proyectos:
+-------------------------------------------------
+Apache
+PHP 8.2
+Laravel 10
+Livewire 2
+AdminLTE
+
+Postgres (https://www.postgresql.org/download/)
+Postgis (https://postgis.net/)
+
+GeoServer 2.24.2 - Released on January 24, 2024
+Java SE Development Kit 17.0.10
+
+GitHUB (https://github.com/webpasscomar/sequia)
+Docker (Opcional)
+
+Librerias de Soft
+GDAL
+https://trac.osgeo.org/gdal/wiki/DownloadingGdalBinaries
+https://ms4w.com/

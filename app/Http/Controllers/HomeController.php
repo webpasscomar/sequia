@@ -7,20 +7,10 @@ use Illuminate\Http\Request;
 class HomeController extends Controller
 {
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
     public function index()
     {
-        // $this->slides = Galeria::where('estado', 1)->get();
+        // $title = 'Mesa nacional del monitor';
+        // return view('mesa', compact('title'));
         return view('home');
     }
 }

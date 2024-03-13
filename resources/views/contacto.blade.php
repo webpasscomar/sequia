@@ -5,24 +5,24 @@
 @section('content')
 
 
-    <!-- jumbotrob / título productos -->
-    <div class="container-fluid p-0 mb-3">
-        <div class="jumbotron jumbotron-fluid imagencover px-4 mb-0 d-flex align-items-center text-center mt-md-n2">
-            <div class="container">
-                <p class="text-black-50 display-5">Contacto</p>
-            </div>
-        </div>
-        <div class="bg-opacity-10 bg-black d-none d-lg-block d-sm-none">
-            <div class="container mt-md-n5 pt-1">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb bg-transparent px-0 py-2">
-                        <li class="breadcrumb-item"><a href="/" class="text-decoration-none">Inicio</a></li>
-                        <li class="breadcrumb-item active text-black" aria-current="page">Contacto</li>
-                    </ol>
-                </nav>
-            </div>
-        </div>
+  <!-- jumbotrob / título productos -->
+  <div class="container-fluid p-0 mb-3">
+    <div class="jumbotron jumbotron-fluid imagencover px-4 mb-0 d-flex align-items-center text-center mt-md-n2">
+      <div class="container">
+        <p class="text-black-50 display-5">Contacto</p>
+      </div>
     </div>
+    <div class="bg-opacity-10 bg-black d-none d-lg-block d-sm-none">
+      <div class="container mt-md-n5 pt-1">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb bg-transparent px-0 py-2">
+            <li class="breadcrumb-item"><a href="/" class="text-decoration-none">Inicio</a></li>
+            <li class="breadcrumb-item active text-black" aria-current="page">Contacto</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
 
 
 
@@ -103,10 +103,11 @@
 
       <!-- mapa -->
       <div class="col-md-5 mb-3">
-        <iframe
+        <h3>Información de contacto</h3>
+        {{-- <iframe
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5642.046963732357!2d-58.40639387263893!3d-34.838111009667415!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcd491284448c7%3A0xb78807c351c8daaf!2sPlacaSur%20S.A.!5e0!3m2!1ses-419!2sar!4v1704333937798!5m2!1ses-419!2sar"
           width="100%" height="415" allowfullscreen="" loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"></iframe>
+          referrerpolicy="no-referrer-when-downgrade"></iframe> --}}
       </div>
     </div>
   </div>

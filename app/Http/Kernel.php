@@ -26,7 +26,7 @@ class Kernel extends HttpKernel
 
     //Registro el middleware AdminRole en la propiedad $routeMiddleware, porque es para rutas especificas.
     protected $routeMiddleware = [
-        'adminRole' => AdminRole::class,
+        'admin-role' => AdminRole::class,
     ];
 
     /**
