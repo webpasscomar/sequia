@@ -13,11 +13,7 @@ class CreateIndicesTable extends Migration
             $table->foreignId('organismo_id')->constrained('organismos');
             $table->string('nombre');
             $table->text('descripcion')->nullable();
-            $table->string('color', 7)->nullable(); // Valor Hexadecimal
-            $table->enum('frecuencia', ['Semanal', 'Mensual', 'Trimestral', 'Variable']);
-            $table->string('escala');
-            $table->string('fuente');
-            $table->string('link');
+            $table->string('paleta')->nullable(); // Valor Hexadecimal
             $table->integer('orden')->default(0);
             $table->integer('estado')->default(1);
             $table->timestamps();

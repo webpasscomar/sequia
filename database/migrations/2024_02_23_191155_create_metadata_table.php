@@ -13,7 +13,13 @@ return new class extends Migration
     {
         Schema::create('metadata', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('indice_id')->constrained('indices');
+            $table->foreignId('indice_id')->constrained('indices'); //puede ser nullable
+            $table->foreignId('capa_id')->constrained('capas'); //puede ser nullable
+            $table->enum('presentacion', ['Vectorial', 'Puntos', 'Poligono']);
+            $table->enum('frecuencia', ['Semanal', 'Mensual', 'Trimestral', 'Variable']);
+            $table->string('escala')->nullable();
+            $table->string('fuente')->nullable();
+            $table->string('link')->nullable();
             $table->timestamps();
         });
     }

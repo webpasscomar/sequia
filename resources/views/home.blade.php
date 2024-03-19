@@ -2,6 +2,8 @@
 @section('title', 'Inicio')
 
 @section('content')
+
+
   <!-- jumbotrob / título productos -->
   <div class="container-fluid p-0 mb-3">
     {{-- <div class="jumbotron jumbotron-fluid imagencover px-4 mb-0 d-flex align-items-center text-center mt-md-n2">
@@ -118,17 +120,51 @@
 
   <!-- Código para inicializar el mapa en el script -->
   <script>
-    // var mapa = L.map('map').setView([-38.416097, -63.616672], 4);
-    // L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png?', {
-    //   attribution: '© OpenStreetMap contributors'
-    // }).addTo(mapa);
+    var mapa = L.map('map').setView([-38.416097, -63.616672], 4);
 
-    var mapa = L.tileLayer.wms(
-      'https://imagenes.ign.gob.ar/geoserver/coberturas_del_suelo/ows?', {
-        layers: 'WMS Imágenes del Instituto Geográfico Nacional',
-        // format: 'image/png',
-        // transparent: true
+    // Agregar la capa base de IGN utilizando TMS
+    var ignLayer = L.tileLayer(
+      'https://wms.ign.gob.ar/geoserver/gwc/service/tms/1.0.0/capabaseargenmap@EPSG%3A3857@png/{z}/{x}/{y}.png', {
+        tms: true,
+        attribution: 'IGN Argentina'
       }).addTo(mapa);
+
+    // Agregar la capa vectorial de IGN
+    var vectorLayer = L.tileLayer.wms('https://wms.ign.gob.ar/geoserver/ows?', {
+      layers: 'area_protegida', // Reemplaza 'nombre_de_la_capa' con el nombre real de la capa vectorial
+      format: 'image/png',
+      transparent: true,
+      attribution: 'IGN Argentina'
+    }).addTo(mapa);
+
+    // Agregar la capa vectorial de IGN
+    var vectorLayer2 = L.tileLayer.wms('https://wms.ign.gob.ar/geoserver/ows?', {
+      layers: 'areas_de_gestion_de_residuos_AB000', // Reemplaza 'nombre_de_la_capa' con el nombre real de la capa vectorial
+      format: 'image/png',
+      transparent: true,
+      attribution: 'IGN Argentina'
+    }).addTo(mapa);
+
+
+    // Agregar un marcador en el centro de Argentina
+    var centroArgentina = L.marker([-38.416097, -63.616672]).addTo(mapa);
+
+    // Definir control de capas
+    var controlCapas = L.control.layers(null, {
+      'Área Protegida': vectorLayer,
+      'Áreas de Gestión de Residuos': vectorLayer2
+    }).addTo(mapa);
+
+    // Crear control de capas con estructura de árbol
+    // var controlCapas = L.control.layers.tree({
+    //   'Capas Base': {
+    //     'IGN Argentina': ignLayer
+    //   },
+    //   'Capas Vectoriales IGN': {
+    //     'Área Protegida': vectorLayer,
+    //     'Áreas de Gestión de Residuos': vectorLayer2
+    //   }
+    // }).addTo(mapa);
   </script>
 
 

@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Http\Controllers\ContactoController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\IndiceController;
 use App\Http\Controllers\MesaController;
 use App\Http\Controllers\ProcesoController;
 use App\Http\Controllers\ReferenciasController;
@@ -31,3 +32,4 @@ Route::get('/contacto', [ContactoController::class, 'index'])->name('contacto');
 Route::get('/mesa', [MesaController::class, 'index'])->name('mesa');
 Route::get('/proceso', [ProcesoController::class, 'index'])->name('proceso');
 Route::get('/referencias', [ReferenciasController::class, 'index'])->name('referencias');
+Route::get('/indices', [IndiceController::class, 'seleccionarIndice'])->name('indice.show');
