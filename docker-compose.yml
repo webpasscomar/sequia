@@ -1,8 +1,9 @@
 version: '3'
 volumes:
     postgres-data:
+      driver: local
     geoserver-data:
-    pgadmin-data:
+      driver: local
 networks:
   backend:
 services:
@@ -19,7 +20,6 @@ services:
 
   postgres:
     image: postgis/postgis
-    container_name: postgres
     environment:
       POSTGRES_DB: sequia
       POSTGRES_USER: sequia
@@ -28,12 +28,14 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ./data/postgres:/var/lib/postgresql/data
+      - postgres-data:/var/lib/postgresql/data
     networks:
       - backend      
 
   pgadmin:
     image: dpage/pgadmin4
+    depends_on:
+      - postgres
     environment:
       PGADMIN_DEFAULT_EMAIL: info@sequia.com.ar
       PGADMIN_DEFAULT_PASSWORD: sequia
@@ -57,6 +59,6 @@ services:
     depends_on:
       - postgres
     volumes:
-      - ./data/geoserver:/opt/geoserver/data_dir
+      - geoserver-data:/opt/geoserver/data_dir
     networks:
       - backend
