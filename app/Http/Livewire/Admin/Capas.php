@@ -14,7 +14,7 @@ class Capas extends Component
 
     protected $capas;
     protected $listeners = ['delete', 'updateTable'];
-    public $preserveInput = ['titulo', 'resumen', 'color', 'fechaDesde', 'fechaHasta', 'frecuencia', 'organismo_id', 'orden', 'capaFilename'];
+    public $preserveInput = ['titulo', 'resumen', 'color', 'fechaDesde', 'fechaHasta', 'frecuencia', 'organismo_id', 'capaFilename'];
 
     public $showModal = 'none';
     public $capa_id,
@@ -23,8 +23,6 @@ class Capas extends Component
         $titulo,
         $resumen,
         $status,
-        $orden,
-        $presentacion,
         $fechaDesde,
         $fechaHasta,
         $georeferencial,
@@ -104,12 +102,10 @@ class Capas extends Component
         $this->indicador_id = $capa->indicador_id;
         $this->titulo = $capa->titulo;
         $this->resumen = $capa->resumen;
-        $this->presentacion = $capa->presentacion;
         $this->georeferencial = $capa->georeferencial;
         $this->fechaDesde = $capa->fechaDesde;
         $this->fechaHasta = $capa->fechaHasta;
         $this->status = $capa->status;
-        $this->orden = $capa->orden;
 
         $this->openModal();
     }
@@ -133,12 +129,9 @@ class Capas extends Component
                 'titulo' => $this->titulo,
                 'indice_id' => $this->indicador_id,
                 'resumen' => $this->resumen,
-                //'georeferencial' => $this->georeferencial,
                 'geom_capa' => $this->georeferencial,
-                //'presentacion' => $this->presentacion,
                 'fechaDesde' => $this->fechaDesde,
                 'fechaHasta' => $this->fechaHasta,
-                'orden' => $this->orden,
                 'status' => 1,
             ]
         );
@@ -190,11 +183,9 @@ class Capas extends Component
         $this->titulo = '';
         $this->resumen = '';
         $this->georeferencial = '';
-        $this->presentacion = '';
         $this->status = 1;
         $this->indicador_id = '';
         $this->capa_id = 0;
-        $this->orden = '';
         $this->fechaDesde = '';
         $this->fechaHasta = '';
         $this->resetErrorBag();

@@ -22,8 +22,7 @@
                             <th scope="col">ID</th>
                             <th scope="col">Nombre</th>
                             <th scope="col">Descripción</th>
-                            <th scope="col">Orden</th>
-                            <th scope="col">Indicador</th>
+                            <th scope="col">Indice</th>
                             <th scope="col" class="text-center" style="width: 15%">Acciones</th>
                         </tr>
                     </thead>
@@ -33,7 +32,6 @@
                                 <th scope="row" class="align-middle">{{ $capa->id }}</th>
                                 <td class="align-middle">{{ $capa->titulo }}</td>
                                 <td class="align-middle">{{ $capa->resumen }}</td>
-                                <td class="align-middle">{{ $capa->orden }}</td>
                                 <td class="align-middle">{{ $capa->indice->nombre }}</td>
                                 <td class="align-middle">
                                     <div class="d-flex flex-md-row gap-1 justify-content-evenly">
