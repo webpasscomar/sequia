@@ -3,14 +3,18 @@
 namespace App\Http\Livewire\Admin;
 
 use App\Models\Capa;
-use App\Models\Indicador;
+use App\Models\Indice;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class Capas extends Component
 {
+    use WithFileUploads;
+
     protected $capas;
     protected $listeners = ['delete', 'updateTable'];
-    public $preserveInput = ['nombre', 'descripcion', 'color', 'frecuencia', 'organismo_id', 'orden'];
+    public $preserveInput = ['titulo', 'resumen', 'color', 'fechaDesde', 'fechaHasta', 'frecuencia', 'organismo_id', 'orden', 'capaFilename'];
 
     public $showModal = 'none';
     public $capa_id,
@@ -24,19 +28,19 @@ class Capas extends Component
         $fechaDesde,
         $fechaHasta,
         $georeferencial,
+        $capaFilename,
         $indicadores;
 
 
     public function render()
     {
         $this->capas = Capa::all();
-        $this->indicadores = Indicador::all();
+        $this->indicadores = Indice::all();
 
         return view('livewire.admin.capas', [
             'capas' => $this->capas,
             'indicadores' => $this->indicadores
-        ])
-            ->layout('layouts.adminlte');
+        ])->layout('layouts.adminlte');
     }
 
     // Actualizar datos del dataTables para la paginación y estilos de la tabla
@@ -51,12 +55,14 @@ class Capas extends Component
         if ($this->accion == 'create') {
             return [
                 'titulo' => 'required',
-                'indicador_id' => 'required'
+                'indicador_id' => 'required',
+                'capaFilename' => 'mimes:rar,zip',
             ];
         } else {
             return [
                 'titulo' => 'required',
-                'indicador_id' => 'required'
+                'indicador_id' => 'required',
+                'capaFilename' => 'mimes:rar,zip',
             ];
         }
     }
@@ -66,13 +72,15 @@ class Capas extends Component
     {
         if ($this->accion == 'create') {
             return [
-                'nombre.required' => 'El nombre es requerido',
-                'indicador_id.required' => 'El indicador es requerido'
+                'titulo.required' => 'El nombre es requerido',
+                'indicador_id.required' => 'El indicador es requerido',
+                'capaFilename.mimes' => 'Solamente se permiten archivos .rar o .zip'
             ];
         } else {
             return [
-                'nombre.required' => 'El nombre del indicador es necesario',
-                'indicador_id.required' => 'El organismo es requerido'
+                'titulo.required' => 'El nombre del indicador es necesario',
+                'indicador_id.required' => 'El organismo es requerido',
+                'capaFilename.mimes' => 'Solamente se permiten archivos .rar o .zip'
             ];
         }
     }
@@ -111,27 +119,44 @@ class Capas extends Component
     {
         $this->validate();
 
+        /* ESTO VUELA, NO??? */
         if ($this->georeferencial) {
             $file_name = $this->georeferencial->getClientOriginalName();
-            $this->georeferencial->sotreAs('georeferencial', $file_name);
+            $this->georeferencial->storeAs('georeferencial', $file_name);
         } else {
             $file_name = $this->georeferencial;
         }
 
-        Capa::updateOrCreate(
+        $capa = Capa::updateOrCreate(
             ['id' => $this->capa_id],
             [
                 'titulo' => $this->titulo,
-                'indicador_id' => $this->indicador_id,
+                'indice_id' => $this->indicador_id,
                 'resumen' => $this->resumen,
-                'georeferencial' => $this->georeferencial,
-                'presentacion' => $this->presentacion,
+                //'georeferencial' => $this->georeferencial,
+                'geom_capa' => $this->georeferencial,
+                //'presentacion' => $this->presentacion,
                 'fechaDesde' => $this->fechaDesde,
                 'fechaHasta' => $this->fechaHasta,
                 'orden' => $this->orden,
                 'status' => 1,
             ]
         );
+
+        $capa_filename = null;
+        if ($this->capaFilename) {
+            $date = date('Ymdhis');
+            $path = "indices/{$this->indicador_id}";
+            $capa_filename = "{$capa->id}-{$date}.{$this->capaFilename->getClientOriginalExtension()}";
+            $this->capaFilename->storeAs(
+                $path,
+                $capa_filename,
+                'local'
+            );
+            $capa->capa_filename = $capa_filename;
+            $capa->save();
+        }
+
         $this->emit('mensajePositivo', ['mensaje' => 'Operación exitosa']);
         $this->resetInputField();
         $this->closeModal();

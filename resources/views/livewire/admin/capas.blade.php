@@ -34,7 +34,7 @@
                                 <td class="align-middle">{{ $capa->titulo }}</td>
                                 <td class="align-middle">{{ $capa->resumen }}</td>
                                 <td class="align-middle">{{ $capa->orden }}</td>
-                                <td class="align-middle">{{ $capa->indicador->nombre }}</td>
+                                <td class="align-middle">{{ $capa->indice->nombre }}</td>
                                 <td class="align-middle">
                                     <div class="d-flex flex-md-row gap-1 justify-content-evenly">
                                         <div class="m-1 mt-3">

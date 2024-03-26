@@ -13,14 +13,14 @@
         <div class="row">
           <div class="form-group col-md-6">
             <label for="nombre">Nombre:</label><span class="ms-1 text-danger fs-6 fw-semibold">*</span>
-            <input type="text" class="form-control" id="nombre" wire:model="nombre">
+            <input type="text" class="form-control" id="nombre" wire:model.debounce.3000ms="titulo">
             @error('nombre')
               <span class="text-danger">{{ $message }}</span>
             @enderror
           </div>
           <div class="form-group col-md-6">
             <label for="indicador_id">Indicador:</label><span class="ms-1 text-danger fs-6 fw-semibold">*</span>
-            <select id="indicador_id" class="form-select" wire:model="indicador_id">
+            <select id="indicador_id" class="form-select" wire:model.lazy="indicador_id">
               <option value="">Seleccione un indicador</option>
               @foreach ($indicadores as $indicador)
                 <option value="{{ $indicador->id }}">{{ $indicador->nombre }}</option>
@@ -32,8 +32,8 @@
           </div>
         </div>
         <div class="form-group">
-          <label for="descripcion">Descripción:</label>
-          <textarea rows="2" class="form-control" id="descripcion" wire:model="descripcion"></textarea>
+          <label for="resumen">Descripción:</label>
+          <textarea rows="2" class="form-control" id="resumen" wire:model.debounce.3000ms="resumen"></textarea>
         </div>
         <div class="row">
           <div class="form-group col-md-6">
@@ -44,6 +44,16 @@
             <label for="fechaHasta">Hasta:</label>
             <input type="date" min="0" id="fechaHasta" class="form-control" wire:model="fechaHasta">
           </div>
+          <div class="form-group">
+            <label for="capaFilename" class="custom-file-upload ">
+                Archivo de capa:
+            </label>
+            <span id="file-name"></span>
+            <input type="file" id="capaFilename" class="form-control" wire:model="capaFilename">
+            @error('capaFilename')
+                <span class="text-danger">{{ $message }}</span>
+            @enderror
+        </div>
           {{-- <div class="form-group col-md-8">
             <label for="frecuencia">Frecuencia:</label><span class="ms-1 text-danger fs-6 fw-semibold">*</span>
             <select class="form-select" id="frecuencia" wire:model="frecuencia">

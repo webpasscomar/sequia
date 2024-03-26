@@ -16,6 +16,7 @@ class CreateCapasTable extends Migration
             $table->date('fechaDesde');
             $table->date('fechaHasta')->nullable();
             $table->geometry('geom_capa')->nullable(); // Puedes cambiar el tipo según el tipo de dato GIS que uses
+            $table->string('capa_filename')->nullable();
             $table->integer('status');
             $table->timestamps();
         });

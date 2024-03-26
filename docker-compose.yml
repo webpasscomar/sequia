@@ -13,6 +13,7 @@ services:
       dockerfile: ./docker/php/Dockerfile
     ports:
       - "80:80"
+      - '${VITE_PORT:-5173}:${VITE_PORT:-5173}'
     volumes:
       - ./:/var/www/html
     networks:
