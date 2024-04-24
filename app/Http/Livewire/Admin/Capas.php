@@ -2,8 +2,10 @@
 
 namespace App\Http\Livewire\Admin;
 
+use App\Jobs\DescomprimirCapa;
 use App\Models\Capa;
 use App\Models\Indice;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -54,13 +56,13 @@ class Capas extends Component
             return [
                 'titulo' => 'required',
                 'indicador_id' => 'required',
-                'capaFilename' => 'mimes:rar,zip',
+                'capaFilename' => 'file|mimes:rar,zip',
             ];
         } else {
             return [
                 'titulo' => 'required',
                 'indicador_id' => 'required',
-                'capaFilename' => 'mimes:rar,zip',
+                'capaFilename' => 'file|mimes:rar,zip',
             ];
         }
     }
@@ -113,7 +115,10 @@ class Capas extends Component
     // Guardar ó actualzar el Organismo
     public function store()
     {
+        Log::debug($this->capaFilename->getFilename());
+        Log::debug('llega?');
         $this->validate();
+        Log::debug('Pasa?');
 
         /* ESTO VUELA, NO??? */
         if ($this->georeferencial) {
@@ -148,6 +153,8 @@ class Capas extends Component
             );
             $capa->capa_filename = $capa_filename;
             $capa->save();
+
+            DescomprimirCapa::dispatch($capa);
         }
 
         $this->emit('mensajePositivo', ['mensaje' => 'Operación exitosa']);

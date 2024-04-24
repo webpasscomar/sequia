@@ -18,6 +18,8 @@ services:
       - ./:/var/www/html
     networks:
       - backend
+    depends_on:
+      - postgres
 
   postgres:
     image: postgis/postgis
@@ -31,7 +33,7 @@ services:
     volumes:
       - postgres-data:/var/lib/postgresql/data
     networks:
-      - backend      
+      - backend
 
   pgadmin:
     image: dpage/pgadmin4

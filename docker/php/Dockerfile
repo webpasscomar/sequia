@@ -53,5 +53,7 @@ RUN chown -R www-data:www-data \
   /var/www/html/storage \
   /var/www/html/bootstrap/cache
 
+RUN apt-get update && apt-get install -y gdal-bin && apt-get install -y postgis
+
 # Puerto expuesto
 EXPOSE 80 443 5173
